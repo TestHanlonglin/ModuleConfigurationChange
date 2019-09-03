@@ -10,4 +10,5 @@ public class Modules {
     public static final String MODULE_APP="app";
     public static final String MODULE_MODULE1="module1";
     public static final String MODULE_MODULE2="module2";
+    public static final String MODULE_MODULE3="module3";
 }

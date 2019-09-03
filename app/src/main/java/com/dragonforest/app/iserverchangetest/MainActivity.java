@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
                         .setTarget(Targets.TARGET_MODULE2_MAINACTIVITY)
                         .go();
                 break;
+            case R.id.btn_goto_module3:
+                NavigationUtil.getInstance()
+                        .with(this)
+                        .module(Modules.MODULE_MODULE3)
+                        .setTarget(Targets.TARGET_MODULE3_MAINACTIVITY)
+                        .go();
+                break;
             case R.id.btn_do_request:
                 String token = ModuleConfigurationManager.getInstance().getCurrentModuleConfiguration().getToken();
                 Toast.makeText(this, "当前token:"+token, Toast.LENGTH_SHORT).show();

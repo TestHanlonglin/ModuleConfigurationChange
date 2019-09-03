@@ -31,7 +31,7 @@
 }
 ```
     
-* *  AndroidManifest.xml配置各个模块的配置,注意这里的name必须是module+数字（1-20）,app有且只有一个（为主模块），value为配置文件的全类名:
+* *  AndroidManifest.xml配置各个模块的配置,注意这里的name必须是module+数字（1-20）,app有且只有一个（为主模块）;value为配置文件的全类名:
 ```
     <!--配置各个模块的配置-->
         <meta-data

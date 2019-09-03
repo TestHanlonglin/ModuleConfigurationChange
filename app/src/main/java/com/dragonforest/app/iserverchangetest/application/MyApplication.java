@@ -1,5 +1,6 @@
 package com.dragonforest.app.iserverchangetest.application;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.dragonforest.app.common.HttpSDK.TokenSDK;
@@ -18,12 +19,14 @@ public class MyApplication extends CommonApplication {
         ModuleConfigurationManager.getInstance().init(this);
         ModuleConfigurationManager.getInstance().setOnResetConfigurationListener(new ModuleConfigurationManager.onResetConfigurationListener() {
             @Override
-            public void onReset(ModuleConfiguration moduleConfiguration) {
+            public void onReset(ModuleConfiguration moduleConfiguration, Activity activity) {
                 // 重新配置之后的逻辑
                 if (moduleConfiguration != null) {
                     if (moduleConfiguration.getToken() == null || moduleConfiguration.getToken().equals("")) {
-                        TokenSDK.getInstance().init(moduleConfiguration.getIp(),moduleConfiguration.getPort());
-                        moduleConfiguration.setToken(TokenSDK.getInstance().getToken());
+                        TokenSDK.getInstance().init(moduleConfiguration.getIp(), moduleConfiguration.getPort());
+                        if (moduleConfiguration.getToken() == null) {
+                            moduleConfiguration.setToken(TokenSDK.getInstance().getToken());
+                        }
                         Log.e("MyApplication", "OnResetConfigurationListener回调：ip:" + moduleConfiguration.getIp());
                     }
                 }

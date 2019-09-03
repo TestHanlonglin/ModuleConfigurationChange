@@ -29,6 +29,9 @@
             android:name="module2"
             android:value="com.dragonforest.app.iserverchangetest.configuration.Module2Configuration"/>
         <meta-data
+            android:name="module3"
+            android:value="com.dragonforest.app.iserverchangetest.configuration.Module3Configuration"/>
+        <meta-data
             android:name="app"
             android:value="com.dragonforest.app.iserverchangetest.configuration.AppConfiguration"/>
     </application>

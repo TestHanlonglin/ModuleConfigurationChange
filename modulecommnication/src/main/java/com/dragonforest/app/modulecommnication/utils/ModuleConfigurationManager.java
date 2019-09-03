@@ -40,6 +40,9 @@ import java.util.HashMap;
  */
 public class ModuleConfigurationManager {
 
+    /**
+     * 当前程序所使用的环境
+     */
     public ModuleConfiguration currentModuleConfiguration = null;
 
     private static ModuleConfigurationManager instance;
@@ -58,7 +61,13 @@ public class ModuleConfigurationManager {
         return currentModuleConfiguration;
     }
 
+    /**
+     * 修改环境后的后续监听器
+     */
     private onResetConfigurationListener onResetConfigurationListener;
+    /**
+     * 所有模块的配置管理容器
+     */
     private HashMap<String, ModuleConfiguration> configurationContainer = new HashMap<>();
 
     public HashMap<String, ModuleConfiguration> getConfigurationContainer() {
@@ -102,6 +111,11 @@ public class ModuleConfigurationManager {
         }
     }
 
+    /**
+     * 注册监听activity的生命周期
+     *
+     * @param context
+     */
     public void registerActivityLifeCircle(Context context) {
         ((Application) context).registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
@@ -145,8 +159,13 @@ public class ModuleConfigurationManager {
         this.onResetConfigurationListener = onResetConfigurationListener;
     }
 
+    /**
+     * 切换环境
+     *
+     * @param activity
+     */
     private void changeModule(Activity activity) {
-        ModuleConfiguration oldModuleConfiguration=currentModuleConfiguration;
+        ModuleConfiguration oldModuleConfiguration = currentModuleConfiguration;
         // 使用标识注解区分
         if (activity.getClass().isAnnotationPresent(ModuleApp.class)) {
             currentModuleConfiguration = getModuleConfiguration("app");
@@ -155,47 +174,52 @@ public class ModuleConfigurationManager {
         } else if (activity.getClass().isAnnotationPresent(Module2.class)) {
             currentModuleConfiguration = getModuleConfiguration("module2");
         } else if (activity.getClass().isAnnotationPresent(Module3.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module3");
         } else if (activity.getClass().isAnnotationPresent(Module4.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module4");
         } else if (activity.getClass().isAnnotationPresent(Module5.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module5");
         } else if (activity.getClass().isAnnotationPresent(Module6.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module6");
         } else if (activity.getClass().isAnnotationPresent(Module7.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module7");
         } else if (activity.getClass().isAnnotationPresent(Module8.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module8");
         } else if (activity.getClass().isAnnotationPresent(Module9.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module9");
         } else if (activity.getClass().isAnnotationPresent(Module10.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module10");
         } else if (activity.getClass().isAnnotationPresent(Module11.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module11");
         } else if (activity.getClass().isAnnotationPresent(Module12.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module12");
         } else if (activity.getClass().isAnnotationPresent(Module13.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module13");
         } else if (activity.getClass().isAnnotationPresent(Module14.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module14");
         } else if (activity.getClass().isAnnotationPresent(Module15.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module15");
         } else if (activity.getClass().isAnnotationPresent(Module16.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module16");
         } else if (activity.getClass().isAnnotationPresent(Module17.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module17");
         } else if (activity.getClass().isAnnotationPresent(Module18.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module18");
         } else if (activity.getClass().isAnnotationPresent(Module19.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module19");
         } else if (activity.getClass().isAnnotationPresent(Module20.class)) {
-            currentModuleConfiguration = getModuleConfiguration("module2");
+            currentModuleConfiguration = getModuleConfiguration("module20");
         } else {
+            // 未标注的 默认使用主模块app的配置
             currentModuleConfiguration = getModuleConfiguration("app");
+            DFLog.W("未找到对应的模块配置，将使用app默认的配置");
         }
-        if(currentModuleConfiguration!=oldModuleConfiguration) {
+        if (currentModuleConfiguration == null) {
+            DFLog.E("模块的配置信息为空，请检查AndroidManifest.xml中是否配置了相应的meta-data信息！！");
+        }
+        if (currentModuleConfiguration != oldModuleConfiguration) {
             if (onResetConfigurationListener != null) {
-                onResetConfigurationListener.onReset(currentModuleConfiguration);
+                onResetConfigurationListener.onReset(currentModuleConfiguration,activity);
             }
         }
     }
@@ -226,6 +250,6 @@ public class ModuleConfigurationManager {
         /**
          * 重新设置配置之后的操作
          */
-        void onReset(ModuleConfiguration moduleConfiguration);
+        void onReset(ModuleConfiguration moduleConfiguration,Activity activity);
     }
 }

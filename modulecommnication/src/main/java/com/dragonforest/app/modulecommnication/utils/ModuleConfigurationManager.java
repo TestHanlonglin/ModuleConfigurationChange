@@ -106,7 +106,7 @@ public class ModuleConfigurationManager {
         ((Application) context).registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-
+                changeModule(activity);
             }
 
             @Override
@@ -116,55 +116,7 @@ public class ModuleConfigurationManager {
 
             @Override
             public void onActivityResumed(Activity activity) {
-                // 使用标识注解区分
-                if (activity.getClass().isAnnotationPresent(ModuleApp.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("app");
-                } else if (activity.getClass().isAnnotationPresent(Module1.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module1");
-                } else if (activity.getClass().isAnnotationPresent(Module2.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module3.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module4.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module5.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module6.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module7.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module8.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module9.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module10.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module11.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module12.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module13.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module14.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module15.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module16.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module17.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module18.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module19.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else if (activity.getClass().isAnnotationPresent(Module20.class)) {
-                    currentModuleConfiguration = getModuleConfiguration("module2");
-                } else {
-                    currentModuleConfiguration = getModuleConfiguration("app");
-                }
-                if (onResetConfigurationListener != null) {
-                    onResetConfigurationListener.onReset(currentModuleConfiguration);
-                }
+                changeModule(activity);
             }
 
             @Override
@@ -191,6 +143,61 @@ public class ModuleConfigurationManager {
 
     public void setOnResetConfigurationListener(ModuleConfigurationManager.onResetConfigurationListener onResetConfigurationListener) {
         this.onResetConfigurationListener = onResetConfigurationListener;
+    }
+
+    private void changeModule(Activity activity) {
+        ModuleConfiguration oldModuleConfiguration=currentModuleConfiguration;
+        // 使用标识注解区分
+        if (activity.getClass().isAnnotationPresent(ModuleApp.class)) {
+            currentModuleConfiguration = getModuleConfiguration("app");
+        } else if (activity.getClass().isAnnotationPresent(Module1.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module1");
+        } else if (activity.getClass().isAnnotationPresent(Module2.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module3.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module4.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module5.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module6.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module7.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module8.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module9.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module10.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module11.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module12.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module13.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module14.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module15.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module16.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module17.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module18.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module19.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else if (activity.getClass().isAnnotationPresent(Module20.class)) {
+            currentModuleConfiguration = getModuleConfiguration("module2");
+        } else {
+            currentModuleConfiguration = getModuleConfiguration("app");
+        }
+        if(currentModuleConfiguration!=oldModuleConfiguration) {
+            if (onResetConfigurationListener != null) {
+                onResetConfigurationListener.onReset(currentModuleConfiguration);
+            }
+        }
     }
 
     /**
